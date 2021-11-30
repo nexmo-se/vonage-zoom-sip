@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+
+    <script src="index.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="publisher"></div>
+      <div class="form">
+        <form class="form__content">
+          <div>
+            <input
+              class="form__content"
+              type="text"
+              id="meetingId"
+              placeholder="meeting ID"
+            />
+          </div>
+          <div>
+            <input
+              class="form__content"
+              type="text"
+              id="meetingPassword"
+              placeholder="password"
+            />
+          </div>
+
+          <button class="form__content" id="call__button">
+            Connect with Zoom
+          </button>
+        </form>
+      </div>
+      <div id="subscriber"></div>
+    </div>
+  </body>
+</html>

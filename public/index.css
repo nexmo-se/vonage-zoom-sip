@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+}
+#publisher {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+#subscriber {
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form__content {
+  margin: 5px;
+  padding: 8px;
+}
+body,
+html {
+  background-color: gray;
+  height: 100%;
+}
