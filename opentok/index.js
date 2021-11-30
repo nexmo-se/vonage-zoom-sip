@@ -31,14 +31,13 @@ const generateToken = (sessionId) => {
 };
 
 const dialZoom = (sessionId, meetingId, password) => {
-  console.log(meetingId, password);
   return new Promise((resolve, reject) => {
     const token = opentok.generateToken(sessionId);
     const sipResult = opentok.dial(
       sessionId,
       token,
       `sip:${meetingId}.${password}@zoomcrc.com;transport=tls`,
-      { secure: true, video: true },
+      { secure: true, video: true, from: 'Vonage_publisher' },
       (err, resp) => {
         if (!err) {
           resolve(resp);
@@ -48,6 +47,13 @@ const dialZoom = (sessionId, meetingId, password) => {
         }
       }
     );
+  });
+};
+
+const sendDtmf = async (sessionId, connectionId, digits) => {
+  opentok.playDTMF(sessionId, connectionId, digits, (err, resp) => {
+    if (err) console.log(err);
+    else console.log(resp);
   });
 };
 
@@ -62,4 +68,5 @@ module.exports = {
   getCredentials,
   generateToken,
   dialZoom,
+  sendDtmf,
 };

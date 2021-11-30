@@ -24,6 +24,20 @@ window.addEventListener('load', function () {
     });
   });
 
+  const muteButton = document.getElementById('mute__button');
+  muteButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const data = { sessionId };
+    const response = await fetch('/mute', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  });
+
   // (optional) add server code here
 
   const SERVER_BASE_URL = 'http://localhost:3000';

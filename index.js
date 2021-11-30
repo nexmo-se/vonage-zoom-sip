@@ -13,10 +13,12 @@ require('dotenv').config({ path: `${envPath}/.env.${env}` });
 const cors = require('cors');
 
 const opentok = require('./opentok/index');
+const { application } = require('express');
 
 const port = 3000;
 const public = path.join(__dirname, 'public');
 const sessions = {};
+let sipConnectionId;
 
 app.use(cors());
 app.use('/', express.static(public));
@@ -59,12 +61,20 @@ app.post('/sip_dial', async (req, res) => {
       meetingId,
       meetingPassword
     );
+    if (response) sipConnectionId = response.connectionId;
     console.log(response);
   } catch (e) {
     console.log(e);
   }
 
   res.sendStatus(200);
+});
+
+app.post('/mute', async (req, res) => {
+  console.log('mute requested');
+  const { sessionId } = req.body;
+  res.sendStatus(200);
+  opentok.sendDtmf(sessionId, sipConnectionId, '1p4p1p0p0p3p2');
 });
 
 app.listen(port, () => {
