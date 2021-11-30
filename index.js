@@ -54,7 +54,7 @@ app.get('/session/:room', async (req, res) => {
 app.post('/sip_dial', async (req, res) => {
   const { sessionId, meetingId, meetingPassword } = req.body;
   try {
-    const response = await pentok.dialZoom(
+    const response = await opentok.dialZoom(
       sessionId,
       meetingId,
       meetingPassword
