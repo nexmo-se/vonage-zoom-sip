@@ -32,18 +32,23 @@ const generateToken = (sessionId) => {
 
 const dialZoom = (sessionId, meetingId, password) => {
   console.log(meetingId, password);
-  const token = opentok.generateToken(sessionId);
-  const sipResult = opentok.dial(
-    sessionId,
-    token,
-    `sip:${meetingId}.${password}@zoomcrc.com;transport=tls`,
-    { secure: true, video: true },
-    (err, resp) => {
-      if (!err) console.log(resp);
-      else console.log(err);
-    }
-  );
-  console.log(sipResult);
+  return new Promise((resolve, reject) => {
+    const token = opentok.generateToken(sessionId);
+    const sipResult = opentok.dial(
+      sessionId,
+      token,
+      `sip:${meetingId}.${password}@zoomcrc.com;transport=tls`,
+      { secure: true, video: true },
+      (err, resp) => {
+        if (!err) {
+          resolve(resp);
+        } else {
+          reject(err);
+          console.log(err);
+        }
+      }
+    );
+  });
 };
 
 const getCredentials = async (session = null) => {
